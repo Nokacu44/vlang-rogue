@@ -1,8 +1,8 @@
 module game 
 
 struct Actor_Manager {
-mut:
-	actors []&Actor
+pub mut:
+	actors map[string]&Actor
 }
 
 
@@ -36,7 +36,11 @@ fn (mut m Actor_Manager)new_actor(s Actor_Stereotype, name string , x int, y int
 	}
 	actor.pos.x = x
 	actor.pos.y = y
-	m.actors << actor
+
+	ax := actor.pos.x / 16
+	ay := actor.pos.y / 16
+
+	m.actors["$ax,$ay"] = actor
 
 	return actor
 }
